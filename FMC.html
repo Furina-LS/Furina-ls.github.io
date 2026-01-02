@@ -39,12 +39,16 @@
         
         /* 顶部导航栏样式 */
         nav {
-            background: linear-gradient(135deg, rgba(12, 56, 102, 0.95) 0%, rgba(25, 100, 175, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(12, 56, 102, 0.98) 0%, rgba(25, 100, 175, 0.98) 100%);
             color: white;
             padding: 18px 40px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.2);
             text-align: left;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -52,6 +56,7 @@
             align-items: center;
             border-bottom: 1px solid rgba(135, 206, 235, 0.3);
             backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
 
         .nav-left {
@@ -166,7 +171,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 80px 120px;
+            padding: 100px 120px 80px;
             color: white;
             position: relative;
             overflow: hidden;
@@ -340,17 +345,17 @@
         }
 
         .hero-image img {
-            width: 550px;
+            width: 470px;
             height: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(33, 150, 243, 0.4);
             border-radius: 15px;
-            transform: rotate(3deg) translateY(-10px);
+            transform: rotate(3deg) translateY(35px);
             transition: all 0.4s ease;
             border: 3px solid rgba(255, 255, 255, 0.2);
         }
 
         .hero-image:hover img {
-            transform: rotate(0deg) translateY(-20px) scale(1.05);
+            transform: rotate(0deg);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(33, 150, 243, 0.6);
         }
 
@@ -580,8 +585,8 @@
             backdrop-filter: blur(20px);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
+            transform-style: flat;
+            perspective: none;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
@@ -674,9 +679,7 @@
             z-index: 2;
         }
         
-        .feature-card:hover p, .feature-card:hover li {
-            transform: translateZ(15px);
-        }
+        
         
         /* 列表样式增强 */
         .feature-card ul li {
@@ -809,16 +812,24 @@
         
         /* 导航栏样式 */
         nav {
-            background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);
+            background: linear-gradient(135deg, rgba(12, 56, 102, 0.98) 0%, rgba(25, 100, 175, 0.98) 100%);
             color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(70, 130, 180, 0.2);
-            text-align: center;
-            position: relative;
+            padding: 18px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.2);
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(135, 206, 235, 0.3);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
         
         nav::before {
@@ -1095,7 +1106,7 @@
     </style>
     <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3;"></canvas>
     <script>
-        // 粒子效果
+        // 优化的粒子效果 - 减少资源占用
         function initParticles() {
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
@@ -1108,18 +1119,23 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
             
-            // 创建粒子
+            // 创建粒子 - 减少粒子数量
             const particles = [];
-            const particleCount = 50;
+            const particleCount = 30; // 从50减少到30
+            const connectionDistance = 100;
+            
+            // 预定义颜色，避免每次都计算
+            const particleColor = 'rgba(135, 206, 235, 0.6)';
+            const lineColor = 'rgba(135, 206, 235, 0.1)';
             
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 3 + 1,
-                    color: `rgba(${135 + Math.random() * 120}, ${206 + Math.random() * 49}, ${235 + Math.random() * 20}, ${Math.random() * 0.5 + 0.3})`,
-                    speedX: Math.random() * 2 - 1,
-                    speedY: Math.random() * 2 - 1
+                    radius: Math.random() * 2 + 1, // 稍微减小半径
+                    color: particleColor,
+                    speedX: Math.random() * 1.5 - 0.75, // 稍微减小速度
+                    speedY: Math.random() * 1.5 - 0.75
                 });
             }
             
@@ -1127,6 +1143,7 @@
             function drawParticles() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
+                // 绘制所有粒子
                 particles.forEach(particle => {
                     ctx.beginPath();
                     ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
@@ -1137,37 +1154,61 @@
                     particle.x += particle.speedX;
                     particle.y += particle.speedY;
                     
-                    // 边界检测
-                    if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-                    if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+                    // 边界检测 - 简化逻辑
+                    if (particle.x < 0) {
+                        particle.x = 0;
+                        particle.speedX *= -1;
+                    } else if (particle.x > canvas.width) {
+                        particle.x = canvas.width;
+                        particle.speedX *= -1;
+                    }
                     
-                    // 连接附近的粒子
-                    particles.forEach(otherParticle => {
-                        if (particle !== otherParticle) {
-                            const dx = particle.x - otherParticle.x;
-                            const dy = particle.y - otherParticle.y;
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-                            
-                            if (distance < 100) {
-                                ctx.beginPath();
-                                ctx.strokeStyle = `rgba(${135 + Math.random() * 120}, ${206 + Math.random() * 49}, ${235 + Math.random() * 20}, ${0.1})`;
-                                ctx.lineWidth = 0.5;
-                                ctx.moveTo(particle.x, particle.y);
-                                ctx.lineTo(otherParticle.x, otherParticle.y);
-                                ctx.stroke();
-                            }
-                        }
-                    });
+                    if (particle.y < 0) {
+                        particle.y = 0;
+                        particle.speedY *= -1;
+                    } else if (particle.y > canvas.height) {
+                        particle.y = canvas.height;
+                        particle.speedY *= -1;
+                    }
                 });
+                
+                // 绘制粒子连接 - 优化算法，避免重复计算
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = 0.5;
+                
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distanceSquared = dx * dx + dy * dy;
+                        
+                        // 使用平方距离比较，避免开方运算
+                        if (distanceSquared < connectionDistance * connectionDistance) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
             }
             
-            // 动画循环
-            function animate() {
-                drawParticles();
+            // 动画循环 - 控制帧率
+            let lastTime = 0;
+            const fps = 30;
+            const frameInterval = 1000 / fps;
+            
+            function animate(currentTime) {
+                // 控制帧率
+                if (currentTime - lastTime >= frameInterval) {
+                    drawParticles();
+                    lastTime = currentTime;
+                }
+                
                 requestAnimationFrame(animate);
             }
             
-            animate();
+            animate(0);
         }
         
         // 检测用户操作系统、位数和设备类型
@@ -1382,109 +1423,111 @@
             });
         }
 
-        // 滚动动画逻辑
-        function setupScrollAnimation() {
+        // 节流函数
+        function throttle(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // 优化的滚动效果函数 - 使用Intersection Observer替代传统滚动监听
+        function setupScrollEffects() {
             const cards = document.querySelectorAll('.feature-card');
+            const header = document.querySelector('header');
             let lastScrollTop = 0;
+            let windowHeight = window.innerHeight;
             
-            function checkScroll() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const direction = scrollTop > lastScrollTop ? 'down' : 'up';
-                lastScrollTop = scrollTop;
-                const windowHeight = window.innerHeight;
-                
-                // 计算视口中心位置
-                const viewportCenter = scrollTop + windowHeight / 2;
-                
-                cards.forEach((card, index) => {
-                    const cardRect = card.getBoundingClientRect();
-                    const cardTop = cardRect.top;
-                    const cardBottom = cardRect.bottom;
-                    const cardCenter = scrollTop + cardTop + cardRect.height / 2;
-                    
-                    // 确保所有元素都有初始动画类
-                    if (!card.classList.contains('visible') && 
-                        !card.classList.contains('slide-left') && 
-                        !card.classList.contains('slide-right')) {
-                        card.classList.add('slide-left');
-                    }
-                    
-                    if (direction === 'down') {
-                        // 向下滚动时的逻辑
-                        
-                        // 1. 下面的栏目（新进入视口的）：从左滑到中间
-                        if (cardTop < windowHeight * 0.75 && cardBottom > windowHeight * 0.25) {
-                            // 元素在视口中间区域，显示出来
-                            card.classList.remove('slide-left', 'slide-right');
-                            card.classList.add('visible');
-                        }
-                        // 2. 上面的栏目（正在离开视口的）：从中间滑到右边
-                        else if (cardBottom < 0) {
-                            // 元素完全离开视口顶部，滑到右边
+            // 初始化卡片
+            cards.forEach(card => {
+                if (!card.classList.contains('visible') && 
+                    !card.classList.contains('slide-left') && 
+                    !card.classList.contains('slide-right')) {
+                    card.classList.add('slide-left');
+                }
+            });
+            
+            // 使用Intersection Observer观察卡片可见性
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        // 卡片进入视口
+                        card.classList.remove('slide-left', 'slide-right');
+                        card.classList.add('visible');
+                    } else {
+                        // 卡片离开视口
+                        // 根据离开方向决定动画方向
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        if (scrollTop > lastScrollTop) {
+                            // 向下滚动，卡片向上离开视口
                             card.classList.remove('visible', 'slide-left');
                             card.classList.add('slide-right');
-                        }
-                    } else {
-                        // 向上滚动时的逻辑
-                        
-                        // 1. 下面的栏目（正在离开视口底部的）：从中间滑到左边
-                        if (cardTop > windowHeight) {
-                            // 元素完全离开视口底部，滑到左边
+                        } else {
+                            // 向上滚动，卡片向下离开视口
                             card.classList.remove('visible', 'slide-right');
                             card.classList.add('slide-left');
                         }
-                        // 2. 上面的栏目（正在进入视口顶部的）：从右边滑到中间
-                        else if (cardBottom > 0 && cardTop < 0) {
-                            // 元素从顶部进入视口，先添加slide-right类，再切换到visible类以实现从右滑到中间的效果
-                            card.classList.remove('slide-left');
-                            card.classList.add('slide-right');
-                            setTimeout(() => {
-                                card.classList.remove('slide-right');
-                                card.classList.add('visible');
-                            }, 10);
-                        }
-                        // 3. 中间区域的元素：保持可见状态
-                        else if (cardBottom > windowHeight * 0.25 && cardTop < windowHeight * 0.75) {
-                            // 元素在视口中间区域，保持显示状态
-                            card.classList.remove('slide-left', 'slide-right');
-                            card.classList.add('visible');
-                        }
                     }
                 });
-            }
+            }, {
+                threshold: 0.3, // 当卡片30%可见时触发
+                rootMargin: `${windowHeight * 0.25}px 0px ${windowHeight * 0.25}px 0px` // 视口上下各扩展25%高度
+            });
             
-            // 初始检查
-            checkScroll();
+            // 观察所有卡片
+            cards.forEach(card => {
+                observer.observe(card);
+            });
             
-            // 滚动监听
-            window.addEventListener('scroll', checkScroll);
-        }
-        
-        // 滚动视差效果
-        function setupParallaxEffect() {
-            const header = document.querySelector('header');
-            const cards = document.querySelectorAll('.feature-card');
-            
-            window.addEventListener('scroll', () => {
+            // 视差效果处理函数（只处理当前可见的卡片）
+            function handleParallax() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const direction = scrollTop > lastScrollTop ? 'down' : 'up';
+                lastScrollTop = scrollTop;
                 
                 // Header视差效果
                 if (header) {
                     const parallaxY = scrollTop * 0.4;
-                    header.style.transform = `translateY(${parallaxY}px) translateZ(0)`;
+                    header.style.transform = `translateY(${parallaxY}px)`;
                 }
                 
-                // 卡片视差效果（根据距离顶部的距离调整）
-                cards.forEach((card, index) => {
+                // 只处理可见的卡片的视差效果
+                const visibleCards = document.querySelectorAll('.feature-card.visible');
+                visibleCards.forEach((card) => {
                     const cardRect = card.getBoundingClientRect();
-                    const cardTop = cardRect.top + scrollTop;
-                    const cardDistance = Math.abs(scrollTop + window.innerHeight / 2 - cardTop - cardRect.height / 2);
-                    const parallaxIntensity = (window.innerHeight - cardDistance) * 0.05;
+                    const cardTop = cardRect.top;
+                    const cardDistance = Math.abs(scrollTop + windowHeight / 2 - (scrollTop + cardTop + cardRect.height / 2));
+                    const parallaxIntensity = (windowHeight - cardDistance) * 0.05;
                     
-                    if (cardDistance < window.innerHeight) {
+                    if (cardDistance < windowHeight) {
                         card.style.transform = `translateY(${parallaxIntensity}px) translateZ(0)`;
+                    } else {
+                        card.style.transform = 'translateZ(0)';
                     }
                 });
+            }
+            
+            // 使用节流的滚动监听处理视差效果
+            window.addEventListener('scroll', throttle(handleParallax, 20)); // 约50fps，降低频率减少性能消耗
+            
+            // 初始化检查
+            handleParallax();
+            
+            // 窗口大小改变时更新窗口高度和重新设置rootMargin
+            window.addEventListener('resize', () => {
+                windowHeight = window.innerHeight;
+                // 更新Intersection Observer的rootMargin
+                observer.disconnect();
+                cards.forEach(card => {
+                    observer.observe(card);
+                });
+                handleParallax();
             });
         }
         
@@ -1492,9 +1535,10 @@
         window.onload = function() {
             setPythonDownloadLink();
             setupFufuDownload();
-            setupScrollAnimation();
+            setupScrollEffects();
             initParticles();
-            setupParallaxEffect();
+            // 页面加载时滚动到顶部
+            window.scrollTo(0, 0);
         };
     </script>
 </head>
@@ -1537,7 +1581,7 @@
         </div>
     </div>
 
-    <main style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 247, 255, 0.98) 100%); max-width: 1200px; margin: 0 auto; padding: 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 30px rgba(135, 206, 235, 0.15); backdrop-filter: blur(25px); border: 1px solid rgba(135, 206, 235, 0.4); position: relative; overflow: hidden;">
+    <main style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 247, 255, 0.98) 100%); max-width: 1200px; margin: 0 auto; padding: 150px 50px 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 30px rgba(135, 206, 235, 0.15); backdrop-filter: blur(25px); border: 1px solid rgba(135, 206, 235, 0.4); position: relative; overflow: hidden;">
         <style>
             main::before {
                 content: '';
@@ -1710,7 +1754,7 @@ D:\FMC/
     </main>
 
     <footer id="footer">
-        <p>&copy; 2025 芙芙鼠标连点器</p>
+        <p>&copy; 2026 芙芙鼠标连点器</p>
     </footer>
 </body>
 </html>

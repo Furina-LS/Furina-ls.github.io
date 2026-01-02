@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于与鸣谢 - 芙芙连点器</title>
+    <link rel="icon" href="关于与鸣谢/FMC.ico" type="image/x-icon">
     <style>
         /* 全局样式 */
         * {
@@ -16,12 +17,15 @@
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             line-height: 1.8;
             color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #e6f7ff 0%, #b8e0f8 50%, #e6f7ff 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            max-width: 100%;
+            margin: 0;
+            padding: 120px 0 0 0;
+            background: linear-gradient(180deg, #0c3866 0%, #1964af 100%);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(180deg, #0c3866 0%, #1964af 100%);
+            background-size: 20px 20px, 20px 20px, cover;
             overflow-x: hidden;
             position: relative;
         }
@@ -35,23 +39,15 @@
         
         /* 页头样式 */
         header {
-            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
-            color: #fff;
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(70, 130, 180, 0.3);
-            transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 120px 80px;
+            color: white;
             position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        header:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(70, 130, 180, 0.4);
+            overflow: hidden;
+            min-height: 80vh;
+            background: radial-gradient(ellipse at bottom, rgba(33, 150, 243, 0.2) 0%, transparent 70%);
         }
         
         h1 {
@@ -142,29 +138,33 @@
         
         /* 卡片样式 */
         .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(135, 206, 235, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 247, 255, 0.95) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(135, 206, 235, 0.1);
+            border: 1px solid rgba(135, 206, 235, 0.3);
+            backdrop-filter: blur(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
             transform-style: preserve-3d;
             perspective: 1000px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         
         .feature-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(135, 206, 235, 0.2), transparent);
-            transition: left 0.6s ease;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
         
         .feature-card::after {
@@ -173,12 +173,12 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #87CEEB 0%, #4682B4 100%);
+            height: 6px;
+            background: linear-gradient(90deg, #2196F3, #0D47A1, #2196F3);
             background-size: 200% 100%;
-            animation: gradientMove 2s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            animation: gradientMove 3s linear infinite;
+            opacity: 0.8;
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
         }
         
         @keyframes gradientMove {
@@ -187,29 +187,45 @@
         }
         
         .feature-card:hover {
-            box-shadow: 0 20px 50px rgba(70, 130, 180, 0.3);
-            transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25), 0 0 40px rgba(33, 150, 243, 0.3);
+            transform: translateY(-12px) rotateX(8deg) rotateY(8deg) scale(1.02);
+            border-color: rgba(33, 150, 243, 0.5);
         }
         
         .feature-card:hover::before {
-            left: 100%;
-        }
-        
-        .feature-card:hover::after {
             opacity: 1;
+            animation: pulse 2s ease-in-out infinite;
         }
         
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        /* 卡片内部元素样式 */
         .feature-card h2 {
-            transition: all 0.3s ease;
+            color: #0D47A1;
+            border-bottom: 3px solid #2196F3;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 5px rgba(135, 206, 235, 0.3);
+            font-size: 1.8em;
+            font-weight: 800;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+            animation: none;
         }
         
         .feature-card:hover h2 {
-            transform: translateZ(20px);
-            text-shadow: 0 5px 15px rgba(70, 130, 180, 0.4);
+            transform: translateZ(30px);
+            text-shadow: 0 8px 20px rgba(33, 150, 243, 0.5), 0 0 30px rgba(33, 150, 243, 0.3);
         }
         
         .feature-card p, .feature-card li, .feature-card .person-item {
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
         }
         
         .feature-card:hover p, .feature-card:hover li, .feature-card:hover .person-item {
@@ -267,102 +283,133 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         
-        /* 导航栏样式 */
+        /* 顶部导航栏样式 */
         nav {
-            background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);
+            background: linear-gradient(135deg, rgba(12, 56, 102, 0.98) 0%, rgba(25, 100, 175, 0.98) 100%);
             color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(70, 130, 180, 0.2);
-            text-align: center;
-            position: relative;
+            padding: 18px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.2);
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(135, 206, 235, 0.3);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-left img {
+            width: 45px;
+            height: 45px;
+            margin-right: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(135, 206, 235, 0.5);
             transition: all 0.3s ease;
         }
-        
-        nav::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: left 0.6s ease;
+
+        .nav-left:hover img {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(135, 206, 235, 0.7);
         }
-        
-        nav:hover::before {
-            left: 100%;
-        }
-        
-        nav a {
+
+        .nav-left .nav-title {
+            font-size: 1.6em;
+            font-weight: 900;
             color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 10px rgba(135, 206, 235, 0.5);
+            background: linear-gradient(135deg, #ffffff 0%, #87CEEB 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-left:hover .nav-title {
+            transform: scale(1.05);
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4), 0 0 15px rgba(135, 206, 235, 0.7);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-right a {
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             margin: 0 20px;
             font-size: 1.1em;
-            font-weight: bold;
-            padding: 12px 20px;
-            border-radius: 25px;
+            font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px 15px;
+            border-radius: 20px;
             position: relative;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            z-index: 1;
-            display: inline-block;
         }
-        
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-            z-index: -1;
-        }
-        
-        nav a::after {
+
+        .nav-right a::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.4s ease;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(135, 206, 235, 0.3), transparent);
+            transition: left 0.6s ease;
         }
-        
-        nav a:hover::before {
-            width: 400px;
-            height: 400px;
+
+        .nav-right a:hover {
+            color: #ffffff;
+            background: rgba(135, 206, 235, 0.2);
+            box-shadow: 0 3px 15px rgba(135, 206, 235, 0.4);
+            transform: translateY(-2px);
         }
-        
-        nav a:hover::after {
+
+        .nav-right a:hover::before {
             left: 100%;
         }
-        
-        nav a:hover {
-            transform: translateY(-3px) scale(1.08);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(135, 206, 235, 0.5);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(135, 206, 235, 0.5);
+
+        .nav-right a.current {
+            background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+            color: white;
+            box-shadow: 0 3px 15px rgba(135, 206, 235, 0.5);
         }
-        
-        nav a:active {
-            transform: translateY(-1px) scale(0.96);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* 当前页面高亮效果 */
-        nav a.current {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+
+        /* 响应式导航栏 */
+        @media screen and (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-left {
+                margin-bottom: 15px;
+            }
+            
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .nav-right a {
+                margin: 0 10px;
+                font-size: 1em;
+                padding: 6px 12px;
+            }
         }
         
         /* 按钮样式 */
@@ -721,6 +768,7 @@
         
         // 页面加载完成后设置滚动动画
         window.onload = function() {
+            window.scrollTo(0, 0);
             setupScrollAnimation();
             initParticles();
         };
@@ -804,17 +852,22 @@
     </script>
 </head>
 <body>
+    <nav>
+        <div class="nav-left">
+            <img src="关于与鸣谢/FMC.ico" alt="芙芙连点器">
+            <div class="nav-title">芙芙连点器</div>
+        </div>
+        <div class="nav-right">
+            <a href="index.html">首页</a>
+            <a href="关于与鸣谢.html" class="current">关于与鸣谢</a>
+        </div>
+    </nav>
+
     <header>
         <h1>芙芙连点器</h1>
-        <p>芙芙连点器实现的功能和工具</p>
-        <p><strong>软件作者：</strong>叫我芙芙就好_(澜_)</p>
+        <p><strong>软件作者：</strong>澜_</p>
         <p><strong>B站ID：</strong>叫我芙芙就好_</p>
     </header>
-
-    <nav>
-        <a href="index.html">首页</a>
-        <a href="关于与鸣谢.html" class="current">关于与鸣谢</a>
-    </nav>
 
     <main>
         <section class="feature-card">
@@ -894,7 +947,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 芙芙鼠标连点器</p>
+        <p>&copy; 2026 芙芙鼠标连点器</p>
     </footer>
 </body>
 </html>

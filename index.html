@@ -39,12 +39,16 @@
         
         /* 顶部导航栏样式 */
         nav {
-            background: linear-gradient(135deg, rgba(12, 56, 102, 0.95) 0%, rgba(25, 100, 175, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(12, 56, 102, 0.98) 0%, rgba(25, 100, 175, 0.98) 100%);
             color: white;
             padding: 18px 40px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.2);
             text-align: left;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -52,6 +56,7 @@
             align-items: center;
             border-bottom: 1px solid rgba(135, 206, 235, 0.3);
             backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
 
         .nav-left {
@@ -166,7 +171,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 80px 120px;
+            padding: 100px 120px 80px;
             color: white;
             position: relative;
             overflow: hidden;
@@ -340,17 +345,17 @@
         }
 
         .hero-image img {
-            width: 550px;
+            width: 470px;
             height: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(33, 150, 243, 0.4);
             border-radius: 15px;
-            transform: rotate(3deg) translateY(-10px);
+            transform: rotate(3deg) translateY(35px);
             transition: all 0.4s ease;
             border: 3px solid rgba(255, 255, 255, 0.2);
         }
 
         .hero-image:hover img {
-            transform: rotate(0deg) translateY(-20px) scale(1.05);
+            transform: rotate(0deg);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(33, 150, 243, 0.6);
         }
 
@@ -809,16 +814,24 @@
         
         /* 导航栏样式 */
         nav {
-            background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);
+            background: linear-gradient(135deg, rgba(12, 56, 102, 0.98) 0%, rgba(25, 100, 175, 0.98) 100%);
             color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(70, 130, 180, 0.2);
-            text-align: center;
-            position: relative;
+            padding: 18px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.2);
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(135, 206, 235, 0.3);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
         
         nav::before {
@@ -1495,6 +1508,8 @@
             setupScrollAnimation();
             initParticles();
             setupParallaxEffect();
+            // 页面加载时滚动到顶部
+            window.scrollTo(0, 0);
         };
     </script>
 </head>
@@ -1710,7 +1725,7 @@ D:\FMC/
     </main>
 
     <footer id="footer">
-        <p>&copy; 2025 芙芙鼠标连点器</p>
+        <p>&copy; 2026 芙芙鼠标连点器</p>
     </footer>
 </body>
 </html>
